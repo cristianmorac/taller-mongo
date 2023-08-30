@@ -20,4 +20,4 @@ Página inicial en Atlas, crea nuevo proyecto
 - Drivers
 - Instalar mongodb npm install mongodb
 
-1:16:08
+2:16:01 

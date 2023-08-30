@@ -3,8 +3,8 @@ const router = Router()
 const User = require('../models/users')
 
 router.get('/', async (req,res)=>{
-    user = await User.find()
-    res.status(200).json(user)
+    allUsers = await User.find()
+    res.status(200).json(allUsers)
 })
 
 router.post('/', async (req,res)=>{
