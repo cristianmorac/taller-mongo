@@ -1,49 +1,17 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv/config";
+require("dotenv").config();
+const { PORT } = process.env;
 
-// Crear el servidor y puerto
-const server = express();
-const PORT = process.env.PORT || 6000;
+// conexion con el server
+const server = require("./src/app");
 
-const main = async () => {
-  try {
-    // conexión DB
-    await mongoose.connect(process.env.DBMONGOOSE);
-    console.log('DB ok');
+// conectamos con mongo
+const connection = require("./src/db");
 
-    // Shema
-    const clientesZapatosShema = new mongoose.Schema({
-      name: {
-        type: String,
-        required: true,
-      },
-    });
+connection()
 
-    // Model
-    const ClienteZpatos = mongoose.model('ClienteZapato', clientesZapatosShema)
+try {
+  server.listen(PORT, () => console.log(`server on port ${PORT}`))
+} catch (error) {
+  console.log(error);
+}
 
-    // Rutas
-    server.get("/clientes", async (req, res) => {
-        try {
-            // obtener todos los documentos
-            const clientes = await ClienteZpatos.find();
-            res.status(200).json(clientes)
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({msg: error.message})        
-        }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// middlewares
-server.use(express.json());
-server.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`);
-});
-
-// Ejecutar la DB
-main();
