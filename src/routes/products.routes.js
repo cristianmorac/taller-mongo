@@ -12,7 +12,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).json(allProducts);
   });
 
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     const { name, password } = req.body;
     await Product.create({ name, password });
