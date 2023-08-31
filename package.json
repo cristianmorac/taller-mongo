@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "aplicación que visualice las peliculas",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js"
   },
